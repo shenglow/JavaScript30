@@ -1,2 +1,3 @@
 # JavaScript30
-JavaScript practice.
+
+This repository is for JavaScript30 practice.
