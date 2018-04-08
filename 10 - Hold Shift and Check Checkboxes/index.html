@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hold Shift to Check Mutliple Checkboxes</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div  class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>This is an inbox layout</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Check one item</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Hold down your Shift key</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Check a lower item</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Everything inbetween should also be set to checked</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Try do it with out any libraries</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Just regular JavaScript</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Good Luck!</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Don't forget to tweet your result!</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+        let lastChecked;
+
+        function handleCheck(e) {
+            //如果有按shift鍵且有check(即打勾)
+            let inBetween = false; //flag,用於判斷是否是兩個checkbox中間的checkbox
+            if (e.shiftKey && this.checked) {
+                //把兩個checkbox中間的全部打勾
+                checkboxes.forEach(checkbox => {
+                    //如果是目前打勾的或最後一個打勾的就改變flag,即遇到目前的改為true(開始),遇到最後一個再改為false(結束)
+                    if (checkbox === this || checkbox === lastChecked) {
+                        inBetween = !inBetween;
+                    }
+
+                    if (inBetween) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+
+            lastChecked = this;
+        }
+
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    </script>
+</body>
+</html>
